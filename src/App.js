@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const ProgressBar = () => {
+  const [progress, setProgress] = useState(0);
+
+  const updateProgress = () => {
+    if (progress < 100) {
+      setProgress(progress + 10);
+      setTimeout(updateProgress, 1000);
+    }
+  };
+
+  updateProgress();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div
+        style={{
+          backgroundColor: "#ccc",
+          height: "10px",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#008CBA",
+            height: "10px",
+            width: `${progress}%`,
+          }}
+        ></div>
+      </div>
     </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <div>
+      <ProgressBar />
+      <iframe
+        title="Techfest website"
+        src="https://techfest.org/"
+        style={{ width: "100%", height: "100vh", border: "none" }}
+      ></iframe>
+    </div>
+  );
+};
 
 export default App;
